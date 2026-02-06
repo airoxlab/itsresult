@@ -110,6 +110,13 @@ export default function ZeroTestResult() {
       return;
     }
 
+    // Validate format (ITS-0000)
+    const formatPattern = /^ITS-\d{4}$/i;
+    if (!formatPattern.test(rollNumber.trim())) {
+      setError("Invalid format. Please use format: ITS-0000 (e.g., ITS-1234)");
+      return;
+    }
+
     // Reset states
     setLoading(true);
     setError("");
@@ -197,7 +204,7 @@ export default function ZeroTestResult() {
                 type="text"
                 value={rollNumber}
                 onChange={handleInputChange}
-                placeholder="Enter Roll Number"
+                placeholder="ITS-0000"
                 className="w-full h-12 px-4 text-base border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-gray-400"
                 disabled={loading}
               />
