@@ -162,173 +162,154 @@ export default function ZeroTestResult() {
     : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-50 flex items-center justify-center p-4 sm:p-6">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center p-4 lg:p-6">
+      <div className="w-full max-w-md lg:max-w-5xl">
         {/* Logo Section */}
-        <div className="text-center mb-10">
-          <div className="flex justify-center mb-8">
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-6">
             <div className="relative w-[280px] sm:w-[360px]">
               <Image
                 src="/logo.png"
                 alt="Institution Logo"
                 width={420}
                 height={140}
-                className="w-full h-auto drop-shadow-sm"
+                className="w-full h-auto"
                 priority
               />
             </div>
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
             Zero Test Result
           </h1>
-          <p className="text-gray-500 text-sm sm:text-base font-medium">
+          <p className="text-gray-500 text-sm">
             Enter your roll number to view your result
           </p>
         </div>
 
-        {/* Search Section - Glass Card */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/50 p-6 sm:p-8 mb-6">
-          <form onSubmit={handleSearch} className="space-y-5">
-            {/* Input Field */}
-            <div>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                  </svg>
-                </div>
+        {/* Two Column Layout for Desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          {/* Left Column - Search Section */}
+          <div className="bg-white rounded-xl shadow-lg p-5 sm:p-6 lg:sticky lg:top-6">
+            <form onSubmit={handleSearch} className="space-y-4">
+              {/* Input Field */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Roll Number
+                </label>
                 <input
                   type="text"
                   value={rollNumber}
                   onChange={handleInputChange}
                   placeholder="Enter Roll Number"
-                  className="w-full h-14 pl-12 pr-4 text-base border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder:text-gray-400 bg-white"
+                  className="w-full h-12 px-4 text-base border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-gray-400"
                   disabled={loading}
                 />
               </div>
-            </div>
 
-            {/* Search Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-14 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-6 rounded-xl transition-all duration-200 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 active:scale-95"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Searching...
-                </span>
-              ) : (
-                "Search Result"
-              )}
-            </button>
-          </form>
+              {/* Search Button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Searching...
+                  </span>
+                ) : (
+                  "Search Result"
+                )}
+              </button>
+            </form>
 
-          {/* Error Message */}
-          {error && (
-            <div className="mt-5 p-4 bg-red-50/80 backdrop-blur-sm border border-red-100 rounded-xl">
-              <p className="text-red-600 text-sm font-medium text-center flex items-center justify-center gap-2">
-                <span>❌</span>
-                <span>{error}</span>
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Result Card */}
-        {searched && result && gradeInfo && (
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden animate-bounceIn">
-            {/* Grade Header */}
-            <div className={`p-6 sm:p-8 text-center ${
-              gradeInfo.grade === "A" || gradeInfo.grade === "B"
-                ? "bg-gradient-to-r from-green-500 to-emerald-600"
-                : gradeInfo.grade === "C" || gradeInfo.grade === "D"
-                ? "bg-gradient-to-r from-yellow-500 to-orange-500"
-                : "bg-gradient-to-r from-red-500 to-rose-600"
-            }`}>
-              <div className="text-6xl sm:text-7xl font-black text-white mb-3">
-                {gradeInfo.grade}
+            {/* Error Message */}
+            {error && (
+              <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-700 text-sm text-center">{error}</p>
               </div>
-              <p className="text-white text-base sm:text-lg font-semibold">
-                Grade {gradeInfo.grade}
-              </p>
-            </div>
+            )}
+          </div>
 
-            {/* Student Information */}
-            <div className="p-6 sm:p-8 space-y-6">
-              {/* Student Details Grid */}
-              <div className="space-y-4">
-                <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                  <span className="text-gray-600 font-medium">Student Name</span>
-                  <span className="text-gray-900 font-bold text-lg">{result.name}</span>
+          {/* Right Column - Result Card */}
+          <div className="lg:min-h-[400px]">
+            {searched && result && gradeInfo ? (
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden animate-bounceIn">
+                {/* Header Row */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+                  <h2 className="text-lg font-bold text-gray-900">Result Summary</h2>
+                  <div className={`px-3 py-1 rounded-full border-2 font-bold text-sm ${
+                    gradeInfo.grade === "A"
+                      ? "border-green-500 text-green-700 bg-green-50"
+                      : gradeInfo.grade === "B"
+                      ? "border-blue-500 text-blue-700 bg-blue-50"
+                      : gradeInfo.grade === "C"
+                      ? "border-yellow-500 text-yellow-700 bg-yellow-50"
+                      : gradeInfo.grade === "D"
+                      ? "border-orange-500 text-orange-700 bg-orange-50"
+                      : "border-red-500 text-red-700 bg-red-50"
+                  }`}>
+                    Grade {gradeInfo.grade}
+                  </div>
                 </div>
 
-                <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                  <span className="text-gray-600 font-medium">Father Name</span>
-                  <span className="text-gray-900 font-semibold">{result.father_name}</span>
-                </div>
+                {/* Student Information */}
+                <div className="p-6 space-y-6">
+                  {/* Student Details - Two Column Grid */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">Student Name</p>
+                      <p className="text-sm font-bold text-gray-900">{result.name}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">Father Name</p>
+                      <p className="text-sm font-semibold text-gray-900">{result.father_name}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1">Roll Number</p>
+                      <p className="text-sm font-bold text-gray-900">{result.roll_number}</p>
+                    </div>
+                  </div>
 
-                <div className="flex justify-between items-center pb-3 border-b border-gray-200">
-                  <span className="text-gray-600 font-medium">Roll Number</span>
-                  <span className="text-blue-600 font-bold">{result.roll_number}</span>
-                </div>
-              </div>
+                  {/* Marks Section - Highlighted */}
+                  <div className="bg-blue-50 border-2 border-blue-100 rounded-lg p-5">
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600 font-medium">Obtained Marks</span>
+                        <span className="text-2xl font-black text-gray-900">{result.obtained_marks}</span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600 font-medium">Total Marks</span>
+                        <span className="text-xl font-bold text-gray-700">{result.total_marks}</span>
+                      </div>
+                    </div>
+                  </div>
 
-              {/* Marks Section */}
-              <div className="bg-gray-50 rounded-xl p-5 space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700 font-medium">Obtained Marks</span>
-                  <span className="text-2xl font-bold text-gray-900">{result.obtained_marks}</span>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-700 font-medium">Total Marks</span>
-                  <span className="text-2xl font-bold text-gray-900">{result.total_marks}</span>
-                </div>
-
-                <div className="pt-3 border-t border-gray-200">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-semibold">Grade</span>
-                    <span className={`text-3xl font-black ${
-                      gradeInfo.grade === "A" || gradeInfo.grade === "B"
-                        ? "text-green-600"
-                        : gradeInfo.grade === "C" || gradeInfo.grade === "D"
-                        ? "text-orange-600"
-                        : "text-red-600"
-                    }`}>
-                      {gradeInfo.grade}
-                    </span>
+                  {/* Grade Message */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <p className="text-sm text-gray-700 leading-relaxed text-center">
+                      {gradeInfo.message}
+                    </p>
                   </div>
                 </div>
               </div>
-
-              {/* Motivational Message */}
-              <div className={`p-5 rounded-xl border-2 ${
-                gradeInfo.grade === "A" || gradeInfo.grade === "B"
-                  ? "bg-green-50 border-green-200"
-                  : gradeInfo.grade === "C" || gradeInfo.grade === "D"
-                  ? "bg-yellow-50 border-yellow-200"
-                  : "bg-red-50 border-red-200"
-              }`}>
-                <p className={`text-center font-semibold text-sm sm:text-base ${
-                  gradeInfo.grade === "A" || gradeInfo.grade === "B"
-                    ? "text-green-800"
-                    : gradeInfo.grade === "C" || gradeInfo.grade === "D"
-                    ? "text-yellow-900"
-                    : "text-red-800"
-                }`}>
-                  {gradeInfo.message}
-                </p>
+            ) : (
+              <div className="hidden lg:flex items-center justify-center h-full min-h-[400px] bg-white/50 rounded-xl border-2 border-dashed border-gray-300">
+                <div className="text-center text-gray-400">
+                  <svg className="w-16 h-16 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <p className="font-medium">Result will appear here</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
